@@ -21,12 +21,12 @@ BONUS 3 :testa_che_esplode:
 Inserire un filtro di ricerca che permetta di cercare gli attori o le attrici per nome.
 */
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 function App() {
   const [actresses, setActresses] = useState([]);
   const [actors, setActors] = useState([]);
-
+  const [allActors, setAllActros] = useState([]);
   const urlActresse = "https://lanciweb.github.io/demo/api/actresses/";
   const urlActor = "https://lanciweb.github.io/demo/api/actors/";
   function loadingActresses() {
@@ -48,12 +48,20 @@ function App() {
       });
   }
   useEffect(loadingActor, []);
+
+  function allActorss() {
+    const megaArray = [...actors, ...actresses];
+    console.log(megaArray);
+    setAllActros(megaArray);
+  }
+
+  useEffect(allActorss, [actresses, actors]);
   return (
     <>
       <div>
         <main>
           <div className="container">
-            <div className="row">
+            <div className="row  row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-4  ">
               {actresses.map((actresse) => {
                 return (
                   <div key={actresse.id} className="col">
@@ -74,6 +82,9 @@ function App() {
                           </div>
                           <div>
                             <span>{actresse.nationality} </span>{" "}
+                          </div>
+                          <div>
+                            <span>{actresse.biography} </span>{" "}
                           </div>
                         </div>
                       </div>
@@ -114,9 +125,11 @@ function App() {
             <div className="row">
               <div className="col">
                 <h2>Attrici</h2>
-                <ul class="list-group list-group">
+                <ul className="list-group list-group">
                   {actresses.map((actresse) => {
-                    return <li class="list-group-item ">{actresse.name}</li>;
+                    return (
+                      <li className="list-group-item ">{actresse.name}</li>
+                    );
                   })}
                 </ul>
               </div>
@@ -124,7 +137,24 @@ function App() {
                 <h2>Attori</h2>
                 <ul class="list-group list-group">
                   {actors.map((actor) => {
-                    return <li class="list-group-item ">{actor.name}</li>;
+                    return (
+                      <li key={actor.id} class="list-group-item ">
+                        {actor.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              <div className="col">
+                <h2>Attori e Attrici</h2>
+                <ul className="list-group list-group">
+                  {allActors.map((actor, index) => {
+                    return (
+                      <li key={index} className="list-group-item ">
+                        {actor.name}
+                      </li>
+                    );
                   })}
                 </ul>
               </div>
