@@ -110,6 +110,26 @@ function App() {
               })}
             </div>
           </div>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <h2>Attrici</h2>
+                <ul class="list-group list-group">
+                  {actresses.map((actresse) => {
+                    return <li class="list-group-item ">{actresse.name}</li>;
+                  })}
+                </ul>
+              </div>
+              <div className="col">
+                <h2>Attori</h2>
+                <ul class="list-group list-group">
+                  {actors.map((actor) => {
+                    return <li class="list-group-item ">{actor.name}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </>
