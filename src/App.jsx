@@ -27,6 +27,10 @@ function App() {
   const [actresses, setActresses] = useState([]);
   const [actors, setActors] = useState([]);
   const [allActors, setAllActros] = useState([]);
+  const [filtered, setFiltred] = useState(allActors);
+  const [search, setSearch] = useState({
+    name: "",
+  });
   const urlActresse = "https://lanciweb.github.io/demo/api/actresses/";
   const urlActor = "https://lanciweb.github.io/demo/api/actors/";
   function loadingActresses() {
@@ -50,12 +54,25 @@ function App() {
   useEffect(loadingActor, []);
 
   function allActorss() {
-    const megaArray = [...actors, ...actresses];
-    console.log(megaArray);
-    setAllActros(megaArray);
+    setAllActros([...actors, ...actresses]);
   }
 
   useEffect(allActorss, [actresses, actors]);
+
+  function filterActors() {
+    if (search.name) {
+      const filter = allActors.filter((actor) => {
+        return actor.name.toLowerCase().includes(search.name.toLowerCase());
+      });
+      setFiltred(filter);
+    } else {
+      setFiltred(allActors);
+      console.log(allActors);
+    }
+  }
+
+  useEffect(filterActors, [search.name]);
+
   return (
     <>
       <div>
@@ -128,17 +145,19 @@ function App() {
                 <ul className="list-group list-group">
                   {actresses.map((actresse) => {
                     return (
-                      <li className="list-group-item ">{actresse.name}</li>
+                      <li key={actresse.id} className="list-group-item ">
+                        {actresse.name}
+                      </li>
                     );
                   })}
                 </ul>
               </div>
               <div className="col">
                 <h2>Attori</h2>
-                <ul class="list-group list-group">
+                <ul className="list-group list-group">
                   {actors.map((actor) => {
                     return (
-                      <li key={actor.id} class="list-group-item ">
+                      <li key={actor.id} className="list-group-item ">
                         {actor.name}
                       </li>
                     );
@@ -147,9 +166,15 @@ function App() {
               </div>
 
               <div className="col">
-                <h2>Attori e Attrici</h2>
+                <h2>Cerca Attore o Attrice</h2>
+                <input
+                  type="text"
+                  value={search.name}
+                  onChange={(e) => setSearch({ name: e.target.value })}
+                  className="form-control my-3"
+                />
                 <ul className="list-group list-group">
-                  {allActors.map((actor, index) => {
+                  {filtered.map((actor, index) => {
                     return (
                       <li key={index} className="list-group-item ">
                         {actor.name}
