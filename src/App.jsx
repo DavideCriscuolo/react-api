@@ -84,7 +84,7 @@ function App() {
                   <div key={actresse.id} className="col">
                     <div className="card">
                       <img
-                        className="  ratio ratio-1x1"
+                        className="card-img-top"
                         src={actresse.image}
                         alt="Title"
                       />
@@ -92,19 +92,25 @@ function App() {
                         <h4 className="card-title">{actresse.name}</h4>
                         <div className="card-text">
                           <div>
-                            <span>{actresse.birth_year} </span>{" "}
+                            <span> Nata nel {actresse.birth_year} </span>{" "}
                           </div>
-                          <div>
+                          <div className="py-2">
                             <h5>Conosciuta per</h5>
                             <span>
                               {actresse.most_famous_movies.join(" , ")}{" "}
                             </span>{" "}
                           </div>
-                          <div>
-                            <span>{actresse.nationality} </span>{" "}
+                          <div className="py-2">
+                            <h5>Nazionalità</h5>
+                            <div>
+                              <span>{actresse.nationality} </span>{" "}
+                            </div>
                           </div>
                           <div>
-                            <span>{actresse.biography} </span>{" "}
+                            <h5 className="py-2">Biografia</h5>
+                            <div>
+                              <span>{actresse.biography} </span>{" "}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -125,13 +131,23 @@ function App() {
                         <h4 className="card-title">{actor.name}</h4>
                         <div className="card-text">
                           <div>
-                            <span>{actor.birth_year} </span>{" "}
+                            <span>Nato nel {actor.birth_year} </span>{" "}
+                          </div>
+                          <div className="py-2">
+                            <h5>Conosciuto per</h5>
+                            <span>{actor.known_for.join(" , ")} </span>{" "}
+                          </div>
+                          <div className="py-2">
+                            <h5>Nazionalità</h5>
+                            <div>
+                              <span>{actor.nationality} </span>{" "}
+                            </div>
                           </div>
                           <div>
-                            <p> {actor.known_for.join(" , ")} </p>{" "}
-                          </div>
-                          <div>
-                            <span>{actor.nationality} </span>{" "}
+                            <h5 className="py-2">Biografia</h5>
+                            <div>
+                              <span>{actor.biography} </span>{" "}
+                            </div>
                           </div>
                         </div>
                       </div>
