@@ -21,44 +21,92 @@ BONUS 3 :testa_che_esplode:
 Inserire un filtro di ricerca che permetta di cercare gli attori o le attrici per nome.
 */
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [actresses, setActresses] = useState([]);
   const [actors, setActors] = useState([]);
 
-  const url = "https://www.freetestapi.com/api/v1/actresses";
-
-  function loadingActors() {
-    fetch(url)
+  const urlActresse = "https://lanciweb.github.io/demo/api/actresses/";
+  const urlActor = "https://lanciweb.github.io/demo/api/actors/";
+  function loadingActresses() {
+    fetch(urlActresse)
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setActors(data);
+      .then((dataActress) => {
+        console.log(dataActress);
+        setActresses(dataActress);
       });
   }
-  useEffect(loadingActors, []);
+  useEffect(loadingActresses, []);
+
+  function loadingActor() {
+    fetch(urlActor)
+      .then((res) => res.json())
+      .then((dataActors) => {
+        console.log(dataActors);
+        setActors(dataActors);
+      });
+  }
+  useEffect(loadingActor, []);
   return (
     <>
       <div>
         <main>
           <div className="container">
             <div className="row">
-              {actors.map((actor) => {
-                <div className="col">
-                  <div className="card">
-                    <img
-                      className="card-img-top"
-                      src={actor.image}
-                      alt="Title"
-                    />
-                    <div className="card-body">
-                      <h4 className="card-title">{actor.name}</h4>
-                      <div className="card-text">
-                        <span>{actor.age} </span>
+              {actresses.map((actresse) => {
+                return (
+                  <div key={actresse.id} className="col">
+                    <div className="card">
+                      <img
+                        className="card-img-top"
+                        src={actresse.image}
+                        alt="Title"
+                      />
+                      <div className="card-body">
+                        <h4 className="card-title">{actresse.name}</h4>
+                        <div className="card-text">
+                          <div>
+                            <span>{actresse.birth_year} </span>{" "}
+                          </div>
+                          <div>
+                            <span>{actresse.most_famous_movies} </span>{" "}
+                          </div>
+                          <div>
+                            <span>{actresse.nationality} </span>{" "}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>;
+                );
+              })}
+              {actors.map((actor) => {
+                return (
+                  <div key={actor.id} className="col">
+                    <div className="card">
+                      <img
+                        className="card-img-top"
+                        src={actor.image}
+                        alt="Title"
+                      />
+                      <div className="card-body">
+                        <h4 className="card-title">{actor.name}</h4>
+                        <div className="card-text">
+                          <div>
+                            <span>{actor.birth_year} </span>{" "}
+                          </div>
+                          <div>
+                            <span>{actor.known_for} </span>{" "}
+                          </div>
+                          <div>
+                            <span>{actor.nationality} </span>{" "}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
               })}
             </div>
           </div>
