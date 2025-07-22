@@ -81,7 +81,7 @@ function App() {
             <div className="row  row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-4  ">
               {actresses.map((actresse) => {
                 return (
-                  <div key={actresse.id} className="col">
+                  <div key={actresse.id} className="col py-3">
                     <div className="card">
                       <img
                         className="card-img-top"
@@ -120,8 +120,8 @@ function App() {
               })}
               {actors.map((actor) => {
                 return (
-                  <div key={actor.id} className="col">
-                    <div className="card">
+                  <div key={actor.id} className="col py-3">
+                    <div className="card ">
                       <img
                         className="card-img-top  object-fit-cover "
                         src={actor.image}
