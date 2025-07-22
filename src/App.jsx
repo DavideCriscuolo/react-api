@@ -84,7 +84,7 @@ function App() {
                   <div key={actresse.id} className="col">
                     <div className="card">
                       <img
-                        className="card-img-top"
+                        className="  ratio ratio-1x1"
                         src={actresse.image}
                         alt="Title"
                       />
@@ -95,7 +95,10 @@ function App() {
                             <span>{actresse.birth_year} </span>{" "}
                           </div>
                           <div>
-                            <span>{actresse.most_famous_movies} </span>{" "}
+                            <h5>Conosciuta per</h5>
+                            <span>
+                              {actresse.most_famous_movies.join(" , ")}{" "}
+                            </span>{" "}
                           </div>
                           <div>
                             <span>{actresse.nationality} </span>{" "}
@@ -114,7 +117,7 @@ function App() {
                   <div key={actor.id} className="col">
                     <div className="card">
                       <img
-                        className="card-img-top"
+                        className="card-img-top  object-fit-cover "
                         src={actor.image}
                         alt="Title"
                       />
@@ -125,7 +128,7 @@ function App() {
                             <span>{actor.birth_year} </span>{" "}
                           </div>
                           <div>
-                            <span>{actor.known_for} </span>{" "}
+                            <p> {actor.known_for.join(" , ")} </p>{" "}
                           </div>
                           <div>
                             <span>{actor.nationality} </span>{" "}
